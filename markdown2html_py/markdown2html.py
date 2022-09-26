@@ -107,10 +107,7 @@ def parse_markdown_url(text):
 
     markup_regex = '\[({0})]\(\s*({1})\s*\)'.format(name_regex, url_regex)
 
-    extracted = []
-    for match in re.findall(markup_regex, text):
-        extracted.append(match)
-    return extracted
+    return list(re.findall(markup_regex, text))
 
 # s = '| 1.   | **Neural Networks for Machine Learning**              | Geoffrey Hinton, University of Toronto         | [Lecture-Slides](http://www.cs.toronto.edu/~hinton/coursera_slides.html) <br/> [CSC321-tijmen](https://www.cs.toronto.edu/~tijmen/csc321/) | [YouTube-Lectures](https://www.youtube.com/playlist?list=PLoRl3Ht4JOcdU872GhiYWf6jwrk_SNhz9) <br/> [UofT-mirror](https://www.cs.toronto.edu/~hinton/coursera_lectures.html) | 2012 <br/> 2014 |'
 # print(parse_markdown_url(s))
@@ -134,7 +131,7 @@ def table_topic_emoji_processor(line):
         matches = re.findall(r":(.*?):", line)
         # print(matches)
         for emj in matches:
-            m = ":" + emj + ":"
+            m = f":{emj}:"
             if m in line:
                 # line = line.replace(m, prettify_emoji(emj)) # uncomment this line to enable emojis
                 line = line.replace(m, '')
